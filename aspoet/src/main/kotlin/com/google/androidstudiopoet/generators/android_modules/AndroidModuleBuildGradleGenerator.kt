@@ -63,7 +63,7 @@ class AndroidModuleBuildGradleGenerator(val fileWriter: FileWriter) {
                 Expression("targetSdkVersion", "${blueprint.targetSdkVersion}"),
                 Expression("versionCode", "1"),
                 Expression("versionName", "\"1.0\""),
-                Expression("multiDexEnabled", "true"),
+                // Expression("multiDexEnabled", "true"),
                 Expression("testInstrumentationRunner", "\"android.support.test.runner.AndroidJUnitRunner\"")
         )
         return Closure("defaultConfig", expressions)

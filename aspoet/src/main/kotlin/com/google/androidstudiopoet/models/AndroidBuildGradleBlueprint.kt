@@ -54,7 +54,7 @@ class AndroidBuildGradleBlueprint(val isApplication: Boolean, private val enable
                 LibraryDependency("testImplementation", "junit:junit:4.12"),
                 LibraryDependency("androidTestImplementation", "com.android.support.test:runner:1.0.2"),
                 LibraryDependency("androidTestImplementation", "com.android.support.test.espresso:espresso-core:3.0.2"),
-                LibraryDependency("implementation", "com.android.support:multidex:1.0.3")
+                // LibraryDependency("implementation", "com.android.support:multidex:1.0.3")
         )
 
         if (enableKotlin) {
