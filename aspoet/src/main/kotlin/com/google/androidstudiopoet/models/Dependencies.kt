@@ -16,13 +16,36 @@ limitations under the License.
 
 package com.google.androidstudiopoet.models
 
-open class ModuleDependency(val name: String, val methodToCall: MethodToCall, val method: String) : Dependency
+open class ModuleDependency(override val name: String, val methodToCall: MethodToCall, override val method: String) : Dependency(name, method)
 
 class AndroidModuleDependency(name: String, methodToCall: MethodToCall, method: String, val resourcesToRefer: ResourcesToRefer)
     : ModuleDependency(name, methodToCall, method)
 
-data class LibraryDependency(val method: String, val name: String) : Dependency
+data class LibraryDependency(override val method: String, override val name: String) : Dependency(name, method)
 
 data class GmavenBazelDependency(val name: String) : Dependency
 
-interface Dependency
+/**
+ * Sort by class (Android -> Module -> Library), method, name
+ */
+abstract class Dependency(open val name: String, open val method: String): Comparable<Dependency> {
+  override fun compareTo(other: Dependency): Int {
+    val diffClass = classToOrder(this) - classToOrder(other)
+    if (diffClass != 0) {
+      return diffClass
+    }
+    val diffMethod = method.compareTo(other.method)
+    if (diffMethod != 0) {
+      return diffMethod
+    }
+    return name.compareTo(other.name)
+  }
+
+  private fun classToOrder(other: Dependency) =
+      when (other::class) {
+        AndroidModuleDependency::class -> 0
+        ModuleDependency::class -> 10
+        LibraryDependency::class -> 20
+        else -> 100
+    }
+}

@@ -63,7 +63,7 @@ class AndroidModuleBuildGradleGenerator(val fileWriter: FileWriter) {
                 Expression("targetSdkVersion", "${blueprint.targetSdkVersion}"),
                 Expression("versionCode", "1"),
                 Expression("versionName", "\"1.0\""),
-                Expression("multiDexEnabled", "true"),
+                // Expression("multiDexEnabled", "true"),
                 Expression("testInstrumentationRunner", "\"android.support.test.runner.AndroidJUnitRunner\"")
         )
         return Closure("defaultConfig", expressions)
@@ -117,7 +117,14 @@ class AndroidModuleBuildGradleGenerator(val fileWriter: FileWriter) {
     }
 
     private fun dependenciesClosure(blueprint: AndroidBuildGradleBlueprint): Closure {
-        val dependencyExpressions: Set<Statement> = blueprint.dependencies.mapNotNull { it.toExpression() }.toSet()
+        val sortedDependencies = blueprint.dependencies.toSortedSet()
+        val dependencyExpressions = LinkedHashSet<Statement>()
+        sortedDependencies.map {
+            val expression = it.toExpression()
+            if (expression != null) {
+                dependencyExpressions.add(expression)
+            }
+        }
 
         val statements = listOf(Expression("implementation", "fileTree(dir: 'libs', include: ['*.jar'])")) +
                 dependencyExpressions

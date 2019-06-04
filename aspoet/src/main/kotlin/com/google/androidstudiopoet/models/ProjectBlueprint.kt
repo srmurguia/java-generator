@@ -81,7 +81,7 @@ class ProjectBlueprint(private val projectConfig: ProjectConfig) {
         androidModuleBlueprints = temporaryAndroidBlueprints
         allModuleBlueprints = androidModuleBlueprints + moduleBlueprints
         allModulesNames = allModuleBlueprints.map { it.name }
-        allDependencies = allModuleBlueprints.associate { it.name to it.moduleDependencies }
+        allDependencies = allModuleBlueprints.associate { it.name to it.moduleDependencies.toList() }
         println("\rGenerating blueprints... done in $timeModels ms")
     }
 

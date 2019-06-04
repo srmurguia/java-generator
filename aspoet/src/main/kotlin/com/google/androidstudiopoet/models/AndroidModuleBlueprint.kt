@@ -48,9 +48,10 @@ class AndroidModuleBlueprint(name: String,
 
     private val resourcesToReferWithin by lazy {
         dependencies
-                .filterIsInstance<AndroidModuleDependency>()
-                .map { it.resourcesToRefer }
-                .fold(ResourcesToRefer(listOf(), listOf(), listOf())) { acc, resourcesToRefer -> resourcesToRefer.combine(acc) }
+            .filterIsInstance<AndroidModuleDependency>()
+            .toSortedSet()
+            .map { it.resourcesToRefer }
+            .fold(ResourcesToRefer(listOf(), listOf(), listOf())) { acc, resourcesToRefer -> resourcesToRefer.combine(acc) }
     }
 
     val resourcesBlueprint by lazy {

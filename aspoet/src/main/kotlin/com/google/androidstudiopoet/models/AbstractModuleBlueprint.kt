@@ -29,7 +29,7 @@ abstract class AbstractModuleBlueprint(val name: String,
                                        val generateTests : Boolean) {
 
     val moduleRoot = root.joinPath(name)
-    val moduleDependencies by lazy{ dependencies.filterIsInstance<ModuleDependency>()}
+    val moduleDependencies by lazy{ dependencies.filterIsInstance<ModuleDependency>().toSortedSet()}
     private val methodsToCallWithIn by lazy { moduleDependencies.map { it.methodToCall } }
 
     val packagesBlueprint by lazy {
