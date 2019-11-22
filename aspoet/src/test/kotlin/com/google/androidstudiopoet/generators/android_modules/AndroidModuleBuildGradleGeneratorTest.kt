@@ -23,7 +23,6 @@ android {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,7 +53,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -85,7 +83,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -116,7 +113,6 @@ dependencies {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -151,7 +147,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -168,8 +163,8 @@ dependencies {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "library1"
-    testApi "library2"
     kapt "library3"
+    testApi "library2"
 }"""
         verify(fileWriter).writeToFile(expected, "path")
     }
@@ -187,7 +182,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -230,7 +224,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -270,7 +263,6 @@ dependencies {
         targetSdkVersion 0
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

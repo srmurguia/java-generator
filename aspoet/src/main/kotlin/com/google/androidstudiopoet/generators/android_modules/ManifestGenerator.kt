@@ -39,8 +39,7 @@ class ManifestGenerator(private val fileWriter: FileWriter) {
                 "\n" +
                 "    <uses-permission android:name=\"android.permission.INTERNET\" />\n" +
                 "\n" +
-                "    <uses-sdk android:minSdkVersion=\"${androidBuildConfig.minSdkVersion}\" android:targetSdkVersion=\"${androidBuildConfig.targetSdkVersion}\" />" +
-                applicationTag +
+                "    " + applicationTag +
                 "\n" +
                 "</manifest>"
     }

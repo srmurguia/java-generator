@@ -23,18 +23,29 @@ class AndroidModuleDependency(name: String, methodToCall: MethodToCall, method: 
 
 data class LibraryDependency(override val method: String, override val name: String) : Dependency(name, method)
 
-data class GmavenBazelDependency(val name: String) : Dependency
+data class GmavenBazelDependency(override val name: String) : Dependency(name, null)
 
 /**
  * Sort by class (Android -> Module -> Library), method, name
  */
-abstract class Dependency(open val name: String, open val method: String): Comparable<Dependency> {
+abstract class Dependency(open val name: String, open val method: String?): Comparable<Dependency> {
   override fun compareTo(other: Dependency): Int {
     val diffClass = classToOrder(this) - classToOrder(other)
     if (diffClass != 0) {
       return diffClass
     }
-    val diffMethod = method.compareTo(other.method)
+    val otherMethod = other.method
+    val myMethod = method
+    if (myMethod == null) {
+      if (otherMethod == null) {
+        return 0
+      }
+      return -1
+    }
+    if (otherMethod == null) {
+      return 1
+    }
+    val diffMethod = myMethod.compareTo(otherMethod)
     if (diffMethod != 0) {
       return diffMethod
     }

@@ -28,10 +28,11 @@ class ProjectBuildGradleGenerator(val fileWriter: FileWriter) {
 
         val statements = listOf(
                 getBuildscriptClosure(blueprint),
-                getPluginsClosure(),
+                // getPluginsClosure(),
                 getAllprojectsClosure(blueprint),
-                getCleanTask(),
-                getBuildScanClosure())
+                getCleanTask()
+                //getBuildScanClosure()
+        )
 
         val gradleText = statements.joinToString(separator = "\n") { it.toGroovy(0) }
 
@@ -65,9 +66,11 @@ class ProjectBuildGradleGenerator(val fileWriter: FileWriter) {
             Expression("link", "'GitHub', 'https://github.com/gradle/gradle-build-scan-quickstart'")
     ))
 
+    /*
     private fun getPluginsClosure() = Closure("plugins", listOf(
             StringStatement("id 'com.gradle.build-scan' version '1.8'")
     ))
+    */
 
     private fun getCleanTask() = Task("clean",
             listOf(TaskParameter("type", "Delete")),
